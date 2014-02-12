@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>test_d3</title>
+        <script type="text/javascript" src="d3/d3.v3.js"></script>
+        <script type="text/javascript" src="sheetsee.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.1.0/tabletop.min.js"></script>
+        <style type="text/css">
+        
+        div.bar {
+            display: inline-block;
+            width: 20px;
+            height: 75px;
+            margin-right: 2px;
+            background-color: teal;
+        }
+        </style>
+    </head>
+    <body>
+        <script type="text/javascript">
+            
+            //Width and height
+            var x1 = 40;
+            var y1 = 50;
+            var x2 = 850;
+            var y2 = 150;
+            
+            //Data
+            var dataset = [ 5, 10, 15, 20, 25 ];
+            
+            //Create SVG element
+            var lineGraph = d3.select("body")
+                .append("svg:svg")
+                .attr("width", 1500)   
+                .attr("height", 1500);
+
+            for (var i = 0; i < 5; i++) {
+                var myLine = lineGraph.append("svg:line")
+                    .attr("x1", x1+(2*i))
+                    .attr("y1", y1+(2*i))
+                    .attr("x2", x2+(2*i))
+                    .attr("y2", y2+(2*i))
+                    .style("stroke", "rgb(6,120,155)");
+            };
+
+            // circles.attr("cx", function(d, i) {
+            //             return (i * 50) + 25;
+            //         })
+            //        .attr("cy", h/2)
+            //        .attr("r", function(d) {
+            //             return d;
+            //        });
+
+
+        </script>
+    </body>
+</html>

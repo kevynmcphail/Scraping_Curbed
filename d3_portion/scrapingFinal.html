@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>test_d3</title>
+        <script type="text/javascript" src="d3/d3.v3.js"></script>
+        <script type="text/javascript" src="sheetsee.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.1.0/tabletop.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="stylesheet.css">
+        <style type="text/css">
+        
+        div.bar {
+            display: inline-block;
+            width: 20px;
+            height: 75px;
+            margin-right: 2px;
+            background-color: teal;
+        }
+        </style>
+    </head>
+    <body>
+        <div id = "container">
+            <div id = "neighborhood">Hover over groups of bars to display activity in Manhattan neighborhoods.</div>
+            <div id = "drawing"></div>
+        </div>
+        <script type="text/javascript">
+            var year1;
+            var year2;
+            var year3;
+            var year4;
+            var year5;
+
+            var years = []; 
+
+            document.addEventListener('DOMContentLoaded', function() {
+                var textFiles = ["0AlAEEvnxJsdVdG1Ja3MtdFZsS3c2SXVFVFFZMUR1MlE","0AlAEEvnxJsdVdERCRDc0aFdlSXNGN2tzZDdXNVIzY0E","0AlAEEvnxJsdVdExTcFRmOG8wVjFnNjhFTzF6cjRCOXc","0AlAEEvnxJsdVdGJSa1NHN2hHbVZwMjBvR2I4MjI5YUE","0AlAEEvnxJsdVdEluc2RFOUpaelNqODlMM3dhUlhja1E"]
+                for (var i = 0; i<textFiles.length; i++) {
+                    var URL = textFiles[i];
+                    console.log(textFiles[i]);
+                    Tabletop.init({key:URL, simpleSheet: true, callback: function(data){
+                            years.push(data);
+                            console.log(years.length)
+                            if (years.length == 5){
+                                console.log("yay")
+                                runScript(years);
+                            }
+                        }  
+                    })
+                };
+            });
+            function radians(angle){
+                return 3.14159*angle/180;
+            }
+            function runScript(years) {
+
+
+                var svg = d3.select("#drawing")
+                    .append("svg:svg")
+                    .attr("width", 1500)   
+                    .attr("height", 1500);
+
+                var colors = ["#001A25", "#F4C63D", "#046971", "EADBC4", "D70206" ]
+                var yearNames = ["2005", "2006", "2007", "2008", "2009" ]
+
+                for (var i = 0; i < years.length; i++) {
+                    var inRadius = 300;
+                    var x1 = [];
+                    var y1 = [];
+                    var x2 = [];
+                    var y2 = [];
+                    var offset =-1
+
+                    var circles = svg.append("svg:circle")
+                        .attr("cx", 100)
+                        .attr("cy", 80*i+320)
+                        .attr("r", 10)
+                        .style("fill", colors[i]);
+
+                    var circles = svg.append("svg:text")
+                        .attr("x", 120)
+                        .attr("y", 80*i+329)
+                        .attr("font-family", "Helvetica")
+                        .attr("font-size", "20px")
+                        .text(yearNames[i])
+                        .style("fill", colors[i]);
+
+                    for (var j = 0; j < years[i].length; j++) {
+                        var angle = (Math.PI*2)/years[i].length;
+                        x1.push((inRadius)*Math.cos((angle*j)-radians(offset*i)))
+                        y1.push((inRadius)*Math.sin((angle*j)-radians(offset*i)))
+                        x2.push((inRadius+10+(5*parseInt(years[i][j]["count"])))*Math.cos((angle*j)-radians(offset*i)))
+                        y2.push((inRadius+10+(5*parseInt(years[i][j]["count"])))*Math.sin((angle*j)-radians(offset*i)))
+
+                        var myLine = svg.append("svg:line")
+                            .attr("x1", x1[j]+$(window).width()/2)
+                            .attr("y1", y1[j]+480)
+                            .attr("x2", x2[j]+$(window).width()/2)
+                            .attr("y2", y2[j]+480)
+                            .attr("id", years[0][j]["buzzword"] + ", " + years[i][j]["count"])
+                            .style("stroke", colors[i])
+                            .on("mouseover", function(){
+                                d3.select(this).style("fill","rgb(10,10,10)");
+                                $("#neighborhood").html(this.id)
+                            })
+                            .on("mouseout", function(){
+                                d3.select(this).style("fill","rgb(10,10,10)");
+                                $("#neighborhood").html("Hover over groups of bars to display activity in Manhattan neighborhoods.")
+                            })
+                            .style("stroke-width", "7");
+                    };
+                };
+
+            }
+        </script>
+    </body>
+</html>

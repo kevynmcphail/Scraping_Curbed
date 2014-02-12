@@ -1,0 +1,52 @@
+Buzzword, Count
+Washington Heights, 2
+Harlem, 22
+Inwood, 0
+Sugar Hill, 1
+Upper East Side, 8
+Carnegie Hill, 2
+Upper West Side, 3
+Central Park, 5
+Midtown, 6
+Rockerfeller Center, 0
+Theatre District, 0
+United Nations, 0
+Times Square, 6
+Hudson Yards, 1
+Herald Square, 0
+Koreatown, 0
+Madison Square, 0
+Madison Square Garden, 0
+Kips Bay, 1
+Chelsea, 29
+Flatiron District, 0
+Gramercy Park, 8
+Stuyvesant Town, 0
+Meatpacking District, 0
+NoHo, 0
+Alphabet City, 0
+East Village, 11
+Greenwich Village, 3
+Bowery, 7
+ West Village, 9
+Lower East Side, 18
+SoHo, 0
+NoLita, 0
+Little Italy, 0
+Chinatown, 5
+Financial District, 0
+Tribeca, 12
+Civic Center, 0
+South Street Seaport, 0
+Battery Park, 3
+Bowling Green, 0
+NYU, 2
+High Line, 10
+MoMA, 0
+Guggenhiem, 0
+Whitney Museum, 0
+WTC, 18
+Ground Zero, 7
+Penn Station, 1
+Grand Central, 0
+Hell's Kitchen, 5
